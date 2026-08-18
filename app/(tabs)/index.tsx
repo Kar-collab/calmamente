@@ -1,98 +1,128 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Wind, PauseCircle, Trash2, Heart, Sparkles } from 'lucide-react-native';
+import * as Haptics from 'expo-haptics';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+export default function MenuScreen() {
+  const router = useRouter();
 
-export default function HomeScreen() {
+  const handleNavigate = (route: string) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    router.push(route as any);
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      {/* Cabeçalho de Boas-Vindas */}
+      <View style={styles.header}>
+        <Text style={styles.title}>CalmaMente 🌿</Text>
+        <Text style={styles.subtitle}>
+          Um pequeno espaço para você respirar, desacelerar e se acolher.
+        </Text>
+      </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      {/* Grid de Cards Interativos */}
+      <View style={styles.menuGrid}>
+        <TouchableOpacity
+          style={[styles.card, { borderLeftColor: '#319795' }]}
+          onPress={() => handleNavigate('/sos-ansiedade')}
+          activeOpacity={0.8}
+        >
+          <View style={[styles.iconContainer, { backgroundColor: '#E6FFFA' }]}>
+            <Wind color="#319795" size={28} />
+          </View>
+          <View style={styles.cardTextContainer}>
+            <Text style={styles.cardTitle}>SOS Ansiedade</Text>
+            <Text style={styles.cardDescription}>Encontre seu ponto de apoio (Método 5-4-3-2-1)</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.card, { borderLeftColor: '#38A169' }]}
+          onPress={() => handleNavigate('/micropausa')}
+          activeOpacity={0.8}
+        >
+          <View style={[styles.iconContainer, { backgroundColor: '#F0FFF4' }]}>
+            <PauseCircle color="#38A169" size={28} />
+          </View>
+          <View style={styles.cardTextContainer}>
+            <Text style={styles.cardTitle}>Micropausa</Text>
+            <Text style={styles.cardDescription}>Pare por 30 segundos e respire</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.card, { borderLeftColor: '#C94A29' }]}
+          onPress={() => handleNavigate('/descarrego')}
+          activeOpacity={0.8}
+        >
+          <View style={[styles.iconContainer, { backgroundColor: '#FFF5F5' }]}>
+            <Trash2 color="#C94A29" size={28} />
+          </View>
+          <View style={styles.cardTextContainer}>
+            <Text style={styles.cardTitle}>Descarrego</Text>
+            <Text style={styles.cardDescription}>Deixe um pensamento pesado ir embora</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.card, { borderLeftColor: '#D69E2E' }]}
+          onPress={() => handleNavigate('/acolhimento')}
+          activeOpacity={0.8}
+        >
+          <View style={[styles.iconContainer, { backgroundColor: '#FEFCBF' }]}>
+            <Heart color="#D69E2E" size={28} />
+          </View>
+          <View style={styles.cardTextContainer}>
+            <Text style={styles.cardTitle}>Acolhimento</Text>
+            <Text style={styles.cardDescription}>Uma mensagem gentil para este momento</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      {/* Seção Obrigatória de Tecnologias */}
+      <View style={styles.techSection}>
+        <View style={styles.techHeader}>
+          <Sparkles color="#2C5282" size={20} />
+          <Text style={styles.techTitle}>Tecnologias Utilizadas</Text>
+        </View>
+        <Text style={styles.techItem}>• lucide-react-native (Ícones)</Text>
+        <Text style={styles.techItem}>• expo-haptics (Resposta Tátil)</Text>
+        <Text style={styles.techItem}>• react-native-animatable (Animações de Respiração)</Text>
+        <Text style={styles.techItem}>• date-fns (Registro de Horário)</Text>
+        <Text style={styles.techItem}>• react-native-confetti-cannon (Efeito Visual)</Text>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: { flex: 1, backgroundColor: '#F0F7F4' },
+  content: { padding: 20, paddingTop: 50, paddingBottom: 40 },
+  header: { marginBottom: 28, alignItems: 'center' },
+  title: { fontSize: 30, fontWeight: 'bold', color: '#2D3748', textAlign: 'center' },
+  subtitle: { fontSize: 15, color: '#718096', textAlign: 'center', marginTop: 6, lineHeight: 22 },
+  menuGrid: { gap: 16, marginBottom: 30 },
+  card: {
     flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 14,
     alignItems: 'center',
-    gap: 8,
+    borderLeftWidth: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 2,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+  iconContainer: { padding: 12, borderRadius: 12, marginRight: 14 },
+  cardTextContainer: { flex: 1 },
+  cardTitle: { fontSize: 18, fontWeight: 'bold', color: '#2D3748' },
+  cardDescription: { fontSize: 13, color: '#718096', marginTop: 2 },
+  techSection: { backgroundColor: '#EBF8FF', padding: 18, borderRadius: 12, borderWidth: 1, borderColor: '#BEE3F8' },
+  techHeader: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 8 },
+  techTitle: { fontSize: 16, fontWeight: 'bold', color: '#2C5282' },
+  techItem: { fontSize: 13, color: '#2B6CB0', marginTop: 2 },
 });

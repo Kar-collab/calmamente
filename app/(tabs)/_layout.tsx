@@ -1,35 +1,21 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Stack } from 'expo-router';
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function Layout() {
   return (
-    <Tabs
+    <Stack
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+        headerStyle: { backgroundColor: '#F0F7F4' },
+        headerTintColor: '#2D3748',
+        headerTitleStyle: { fontWeight: 'bold' },
+        headerShadowVisible: false,
+        contentStyle: { backgroundColor: '#F0F7F4' },
+      }}
+    >
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="sos-ansiedade" options={{ title: 'SOS Ansiedade' }} />
+      <Stack.Screen name="micropausa" options={{ title: 'Micropausa' }} />
+      <Stack.Screen name="descarrego" options={{ title: 'Lixeira de Pensamentos' }} />
+      <Stack.Screen name="acolhimento" options={{ title: 'Cartas de Acolhimento' }} />
+    </Stack>
   );
 }
