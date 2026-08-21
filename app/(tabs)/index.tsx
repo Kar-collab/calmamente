@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { Wind, PauseCircle, Trash2, Heart, Sparkles } from 'lucide-react-native';
 import * as Haptics from 'expo-haptics';
 
+
 export default function MenuScreen() {
   const router = useRouter();
 
@@ -20,6 +21,14 @@ export default function MenuScreen() {
         <Text style={styles.subtitle}>
           Um pequeno espaço para você respirar, desacelerar e se acolher.
         </Text>
+
+        {/* Botão de Cadastro adicionado */}
+        <TouchableOpacity 
+          style={{ backgroundColor: '#38A169', padding: 10, borderRadius: 8, marginTop: 10 }}
+          onPress={() => router.push('/cadastro')}
+        >
+          <Text style={{ color: '#FFF', fontWeight: 'bold', textAlign: 'center' }}>Ir para Cadastro de Usuário</Text>
+          </TouchableOpacity>
       </View>
 
       {/* Grid de Cards Interativos */}

@@ -22,3 +22,5 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+<Stack.Screen name="cadastro" options={{ title: 'Cadastro' }} />
