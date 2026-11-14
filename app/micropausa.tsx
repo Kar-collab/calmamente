@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,ScrollView, Animated, Dimensions} from 'react-native';
-import * as Haptics from 'expo-haptics';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import ConfettiCannon from 'react-native-confetti-cannon';
+import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
+import { useEffect, useRef, useState } from 'react';
+import { Animated, Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 type Duracao = 1 | 5 | 10;
 type Fase = 'inspirar' | 'manter' | 'expirar';
@@ -69,7 +69,7 @@ export default function MicropausaScreen() {
       router.replace('/');
     }
   };
-
+  //chamda quando a pessoa escolhe 1, 5 ou 10 minutos
   const selecionarDuracao = (minutos: Duracao) => {
     if (sessaoAtiva) return;
     Haptics.selectionAsync();
@@ -120,7 +120,7 @@ export default function MicropausaScreen() {
     const marcarFase = (indice: number) =>
       Animated.timing(faseAnim, {
         toValue: indice,
-        duration: 0,
+        duration: 0, //não há transição gradual
         useNativeDriver: false,
       });
 
@@ -156,7 +156,7 @@ export default function MicropausaScreen() {
         registrarPausa(); // mantém o registro, o háptico e os confetes
       }
     }, 250);
-
+    //limpeza do contador e para a animação
     return () => {
       clearInterval(timer);
       animacao.stop();
@@ -165,6 +165,7 @@ export default function MicropausaScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessaoAtiva]);
 
+  //se a sessão estiver ativa apresenta o texto atual, se não apresenta 'Pronto?'
   const textoCirculo = sessaoAtiva ? TEXTO_FASE[fase] : 'Pronto?';
 
   return (

@@ -8,7 +8,7 @@ import ConfettiCannon from 'react-native-confetti-cannon';
 const ETAPAS = [
   { id: 5, titulo: '5 coisas que você VÊ', desc: 'Olhe ao redor e observe 5 detalhes do seu ambiente.', icon: Eye, color: '#319795' },
   { id: 4, titulo: '4 coisas que pode TOCAR', desc: 'Sinta a textura da sua roupa, mesa ou pés no chão.', icon: Hand, color: '#2B6CB0' },
-  { id: 3, titulo: '3 sons que pode OUVR', desc: 'Preste atenção nos sons distantes ou próximos.', icon: Volume2, color: '#805AD5' },
+  { id: 3, titulo: '3 sons que pode OUVIR', desc: 'Preste atenção nos sons distantes ou próximos.', icon: Volume2, color: '#805AD5' },
   { id: 2, titulo: '2 coisas que pode CHEIRAR', desc: 'Tente perceber o cheiro do ar ou de algo perto.', icon: Smile, color: '#DD6B20' },
   { id: 1, titulo: '1 coisa que pode SABOREAR', desc: 'Note o gosto na sua boca ou tome um gole d’água.', icon: Utensils, color: '#E53E3E' },
 ];

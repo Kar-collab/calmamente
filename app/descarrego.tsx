@@ -56,7 +56,7 @@ export default function DescarregoScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F0F7F4' },
 
-  content: { padding: 20 },
+  content: { padding: 50 },
   
   title: { fontSize: 22, fontWeight: 'bold', color: '#2D3748', textAlign: 'center' },
   
